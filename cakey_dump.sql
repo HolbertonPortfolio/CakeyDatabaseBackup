@@ -19,3 +19,11 @@ CREATE TABLE IF NOT EXISTS ingredients (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255)
 );
+
+-- Create the pastry_ingredient association table
+CREATE TABLE IF NOT EXISTS pastry_ingredient (
+    pastry_id INT,
+    ingredient_id INT,
+    FOREIGN KEY (pastry_id) REFERENCES pastries(id),
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+);
