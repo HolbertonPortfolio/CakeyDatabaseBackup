@@ -1,8 +1,38 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS cakey;
+CREATE DATABASE IF NOT EXISTS cakey_test;
 
 -- Switch to the database
-USE cakey;
+USE cakey_test;
+
+-- Drop existing tables if they exist to avoid conflicts
+DROP TABLE IF EXISTS pastry_ingredient;
+DROP TABLE IF EXISTS steps;
+DROP TABLE IF EXISTS pastries;
+DROP TABLE IF EXISTS recipes;
+DROP TABLE IF EXISTS ingredients;
+
+-- Create the ingredients table
+CREATE TABLE IF NOT EXISTS ingredients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255)
+);
+
+-- Create the recipes table
+CREATE TABLE IF NOT EXISTS recipes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+-- Create the steps table
+CREATE TABLE IF NOT EXISTS steps (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description TEXT NOT NULL,
+    timer INT NOT NULL,
+    step_number INT NOT NULL,
+    recipe_id INT,
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+);
 
 -- Create the pastries table
 CREATE TABLE IF NOT EXISTS pastries (
@@ -10,14 +40,8 @@ CREATE TABLE IF NOT EXISTS pastries (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     image_url VARCHAR(255),
-    recipe JSON
-);
-
--- Create the ingredients table
-CREATE TABLE IF NOT EXISTS ingredients (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description VARCHAR(255)
+    recipe_id INT,
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id)
 );
 
 -- Create the pastry_ingredient association table
