@@ -1,8 +1,8 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS cakey_test;
+CREATE DATABASE IF NOT EXISTS cakey;
 
 -- Switch to the database
-USE cakey_test;
+USE cakey;
 
 -- Drop existing tables if they exist to avoid conflicts
 DROP TABLE IF EXISTS pastry_ingredient;
